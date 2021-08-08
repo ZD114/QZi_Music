@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangd.music.dao.SingerDao">
+    <resultMap id="SingerMap" type="com.zhangd.music.bean.Singer">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="pic" column="pic"/>
+        <result property="birth" column="birth"/>
+        <result property="location" column="location"/>
+        <result property="introduction" column="introduction"/>
+    </resultMap>
+
+    <!--增加歌手-->
+    <insert id="addSinger" parameterType="com.zhangd.music.bean.Singer">
+        insert into singer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="pic != null">
+                pic,
+            </if>
+            <if test="birth != null">
+                birth,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+        </trim>
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="sex != null">
+                #{sex},
+            </if>
+            <if test="pic != null">
+                #{pic},
+            </if>
+            <if test="birth != null">
+                #{birth},
+            </if>
+            <if test="location != null">
+                #{location},
+            </if>
+            <if test="introduction != null">
+                #{introduction},
+            </if>
+        </trim>
+    </insert>
+    <!--删除歌手-->
+    <delete id="delSinger">
+        delete table singer where id = #{id}
+    </delete>
+    <!--更新歌手-->
+    <update id="updateSinger" parameterType="com.zhangd.music.bean.Singer">
+        update singer set pic = #{pic},location = #{location},introduction = #{introduction}
+        where id = #{id}
+    </update>
+    <!--根据歌手编号查找歌手-->
+    <select id="searchSingerById" resultType="com.zhangd.music.bean.Singer">
+        select * from singer where id = #{id}
+    </select>
+    <!--根据歌手名模糊查找歌手-->
+    <select id="searchSingerByName" resultMap="SingerMap">
+        select * from singer where name like concat('%',#{name},'%')
+    </select>
+    <!--查找所有歌手-->
+    <select id="searchSinger" resultMap="SingerMap">
+        select * from singer
+    </select>
+</mapper>
