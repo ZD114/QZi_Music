@@ -4,7 +4,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    HOST: 'http://127.0.0.1:8090'
+    HOST: 'http://127.0.0.1:8090/MusicManage'
   }
 })
 export default store

@@ -31,6 +31,14 @@
               style="width: 100%"
             />
           </div>
+          <!--更新歌手图片-->
+          <el-upload
+            :action="uploadUrl(scope.row.id)"
+            :before-upload="beforeAvatorUpload"
+            :on-success="handleAvatorSuccess"
+          >
+            <el-button size="mini">更新图片</el-button>
+          </el-upload>
         </template>
       </el-table-column>
       <el-table-column
@@ -44,6 +52,7 @@
         width="60"
         align="center"
       >
+        <!--性别转码触发-->
         <template slot-scope="scope">
           {{changeSex(scope.row.sex)}}
         </template>
@@ -208,6 +217,10 @@ export default {
       getAllSinger().then(res => {
         this.tableData = res
       })
+    },
+    // 更新图片
+    uploadUrl (id) {
+      return `${this.$store.state.HOST}/singer/updateImg?id=${id}`
     }
   }
 }

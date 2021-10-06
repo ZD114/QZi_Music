@@ -1,5 +1,5 @@
-import Vue from 'vue'
 
+import Vue from 'vue'
 // 使用Event Bus
 const bus = new Vue()
 

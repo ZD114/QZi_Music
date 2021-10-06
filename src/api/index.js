@@ -10,3 +10,6 @@ export const setSinger = (params) => post('singer/add', params)
 
 // 查询所有歌手
 export const getAllSinger = () => post('singer/searchAll')
+
+// 查询所有用户
+export const getAllUser = () => post('user/searchAll')
