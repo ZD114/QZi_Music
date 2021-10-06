@@ -2,10 +2,11 @@ package com.zhangd.music.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhangd.music.bean.Singer;
-import com.zhangd.music.dao.SingerDao;
 import com.zhangd.music.service.SingerService;
 import com.zhangd.music.utils.Consts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +27,7 @@ import java.util.List;
  * @Description:
  */
 @RestController
+@Configuration
 @RequestMapping("/singer")
 public class SingerController {
 
@@ -131,7 +133,15 @@ public class SingerController {
         return singerService.searchSinger();
     }
 
-    @PostMapping("/updateImg")
+    /**
+     * @Title: 更新图片
+     * @Author: dzhang
+     * @Date: 2021/10/6 15:16
+     * @Description:
+     * @Params：[imgFile, id]
+     * @Return：java.lang.Object
+     */
+    @RequestMapping(value = "/updateImg", method = RequestMethod.POST)
     public Object updateImgFile(@RequestParam("file") MultipartFile imgFile,@RequestParam("id") int id){
         JSONObject jsonObject = new JSONObject();
         if(imgFile.isEmpty()){
