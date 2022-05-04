@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @Title:
+ * @Title: 跨域问题解决
  * @Author: dzhang
  * @Date: 2021/10/6 15:43
  * @Description:

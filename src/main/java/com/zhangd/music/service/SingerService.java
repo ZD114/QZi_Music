@@ -1,6 +1,8 @@
 package com.zhangd.music.service;
 
+import com.zhangd.music.bean.RespPageEntit;
 import com.zhangd.music.bean.Singer;
+import com.zhangd.music.dao.SingerDao;
 
 import java.util.List;
 
@@ -28,6 +30,13 @@ public interface SingerService {
     public boolean updateSinger(Singer singers);
 
     /**
+     * 更新歌手图片
+     * @param singers
+     * @return
+     */
+    public boolean updateSingerPic(Singer singers);
+
+    /**
      * 根据主键查找歌手
      */
     public Singer searchSingerById(int id);
@@ -41,4 +50,10 @@ public interface SingerService {
      * 查找歌手列表
      */
     public List<Singer> searchSinger();
+
+    /**
+     * 获取分业数据
+     */
+    public RespPageEntit getAllPageSinger(Integer page,Integer size);
+
 }

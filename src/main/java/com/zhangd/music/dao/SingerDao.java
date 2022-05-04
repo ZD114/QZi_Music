@@ -30,6 +30,13 @@ public interface SingerDao {
     public int updateSinger(Singer singers);
 
     /**
+     * 更新歌手图片
+     * @param singers
+     * @return
+     */
+    public int updateSingerPic(Singer singers);
+
+    /**
      * 根据主键查找歌手
      */
     public Singer searchSingerById(int id);
@@ -44,4 +51,13 @@ public interface SingerDao {
      */
     public List<Singer> searchSinger();
 
+    /**
+     * 进行歌手分页
+     */
+    public List<Singer> getAllPageSinger(Integer page, Integer size);
+
+    /**
+     * 获取总数
+     */
+    public Long getTotal();
 }

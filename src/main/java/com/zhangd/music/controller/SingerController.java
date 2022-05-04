@@ -1,22 +1,17 @@
 package com.zhangd.music.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zhangd.music.bean.RespPageEntit;
 import com.zhangd.music.bean.Singer;
 import com.zhangd.music.service.SingerService;
 import com.zhangd.music.utils.Consts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
@@ -43,23 +38,8 @@ public class SingerController {
      * @Return：java.lang.Object
      */
     @PostMapping("/add")
-    public Object addSinger(HttpServletRequest request){
+    public Object addSinger(@ModelAttribute Singer singer){
         JSONObject jsonObject = new JSONObject();
-        Singer singer = new Singer();
-        String sex = request.getParameter("sex");
-        singer.setName(request.getParameter("name"));
-        singer.setSex(new Byte(sex));
-        singer.setPic(request.getParameter("pic"));
-        singer.setLocation(request.getParameter("location"));
-        singer.setIntroduction(request.getParameter("introduction"));
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date birthDate = new Date();
-        try {
-            birthDate = dateFormat.parse(request.getParameter("birth").trim());
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
-        singer.setBirth(birthDate);
         boolean flag = singerService.addSinger(singer);
         if(flag){//保存成功
             jsonObject.put(Consts.CODE,1);
@@ -79,7 +59,7 @@ public class SingerController {
      * @Params：[id]
      * @Return：java.lang.Object
      */
-    @RequestMapping("/del")
+    @RequestMapping("/delSinger")
     public Object delSinger(int id){
         boolean flag = singerService.delSingerById(id);
         return flag;
@@ -98,7 +78,7 @@ public class SingerController {
         JSONObject jsonObject = new JSONObject();
         boolean flag = singerService.updateSinger(singer);
         if(flag){//保存成功
-            jsonObject.put(Consts.CODE,0);
+            jsonObject.put(Consts.CODE,1);
             jsonObject.put(Consts.MSG,"修改成功");
         }else{
             jsonObject.put(Consts.CODE,0);
@@ -168,7 +148,7 @@ public class SingerController {
             Singer singer = new Singer();
             singer.setId(id);
             singer.setPic(storeAvatorPath);
-            boolean flag = singerService.updateSinger(singer);//更新相对路径到数据库中
+            boolean flag = singerService.updateSingerPic(singer);//更新相对路径到数据库中
             if(flag){//上传成功
                 jsonObject.put(Consts.CODE,1);
                 jsonObject.put(Consts.MSG,"上传图片成功");
@@ -184,5 +164,10 @@ public class SingerController {
         } finally {
             return jsonObject;
         }
+    }
+
+    @GetMapping("/getPage")
+    public RespPageEntit getAllPageSinger(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer size){
+        return singerService.getAllPageSinger(page,size);
     }
 }

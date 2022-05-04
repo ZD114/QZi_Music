@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService{
     public List<User> searchUser() {
         return userDao.searchUser();
     }
+
+    @Override
+    public boolean addUser(User user){
+        return userDao.addUser(user)>0;
+    }
 }

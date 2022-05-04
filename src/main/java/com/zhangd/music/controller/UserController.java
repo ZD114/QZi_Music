@@ -1,8 +1,10 @@
 package com.zhangd.music.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zhangd.music.bean.User;
 import com.zhangd.music.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +35,13 @@ public class UserController {
     @PostMapping("/searchAll")
     public List<User> searchUserAll(){
         return userService.searchUser();
+    }
+
+    @PostMapping("/addUser")
+    public Object addUser(@ModelAttribute User user){
+        JSONObject jsonObject = new JSONObject();
+        boolean flag = userService.addUser(user);
+        jsonObject.put("flag",flag);
+        return jsonObject;
     }
 }

@@ -2,6 +2,8 @@ package com.zhangd.music.bean;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Title:
  * @Author: dzhang
@@ -9,7 +11,7 @@ import lombok.Data;
  * @Description:
  */
 @Data
-public class User {
+public class User implements Serializable{
     private Integer id;
 
     private String username;

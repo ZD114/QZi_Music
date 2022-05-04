@@ -17,4 +17,6 @@ public interface UserService {
      * 查找用户列表
      */
     public List<User> searchUser();
+
+    public boolean addUser(User user);
 }

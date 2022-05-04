@@ -17,4 +17,11 @@ public interface UserDao {
      * 查找用户列表
      */
     public List<User> searchUser();
+
+    /**
+     * 新增用户
+     * @param consumer
+     * @return
+     */
+    public int addUser(User consumer);
 }

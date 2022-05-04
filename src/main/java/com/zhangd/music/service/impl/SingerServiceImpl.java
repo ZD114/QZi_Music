@@ -1,5 +1,6 @@
 package com.zhangd.music.service.impl;
 
+import com.zhangd.music.bean.RespPageEntit;
 import com.zhangd.music.bean.Singer;
 import com.zhangd.music.dao.SingerDao;
 import com.zhangd.music.service.SingerService;
@@ -35,6 +36,11 @@ public class SingerServiceImpl implements SingerService {
     }
 
     @Override
+    public boolean updateSingerPic(Singer singers){
+        return singerDao.updateSingerPic(singers)>0;
+    }
+
+    @Override
     public Singer searchSingerById(int id) {
         return singerDao.searchSingerById(id);
     }
@@ -47,5 +53,19 @@ public class SingerServiceImpl implements SingerService {
     @Override
     public List<Singer> searchSinger() {
         return singerDao.searchSinger();
+    }
+
+    @Override
+    public RespPageEntit getAllPageSinger(Integer page, Integer size){
+        RespPageEntit respPageEntit = new RespPageEntit();
+        if(page!=null && size!=null){
+            page = (page-1)*size;
+        }
+        List<Singer> singers = singerDao.getAllPageSinger(page,size);
+        respPageEntit.setData(singers);//查询出来数据放入实体
+        //获取总数
+        Long total = singerDao.getTotal();
+        respPageEntit.setTotal(total);
+        return respPageEntit;
     }
 }
