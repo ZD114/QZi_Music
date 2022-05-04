@@ -60,6 +60,22 @@ export const mixin = {
           type: 'error'
         })
       }
+    },
+    // 删除窗口控制
+    handleDel (id) {
+      this.indx = id
+      this.delVisible = true
+    },
+    // 把已经选择的项赋值给multipleSelection
+    hanleSelectionChange (val) {
+      this.multipleSelection = val
+    },
+    delAll () {
+      for (let item of this.multipleSelection) {
+        this.handleDel(item.id)
+        this.delRow()
+      }
+      this.multipleSelection = []
     }
   }
 }

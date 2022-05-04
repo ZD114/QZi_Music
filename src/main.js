@@ -10,8 +10,9 @@ import axios from 'axios'
 import './assets/css/mian.css'
 import qs from 'qs'
 import store from './store/index.js' // 引入qs
+import moment from 'moment' // 引入时间处理
 Vue.prototype.$qs = qs
-
+Vue.prototype.$moment = moment
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 // 设置基本路径
